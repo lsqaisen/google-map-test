@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "module": "esnext",
+    "target": "esnext",
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": false,
+    "sourceMap": true,
+    "jsx": "preserve",
+    "strict": true,
+    "experimentalDecorators": true,
+    "types": ["node"],
+    "typeRoots": ["../node_modules/@types"],
+    "lib": ["es2017", "dom"],
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"],
+      "@@/*": ["./src/.umi/*"],
+      "@/components/*": ["src/components/*"]
+    }
+  },
+  "exclude": ["node_modules"]
+}
