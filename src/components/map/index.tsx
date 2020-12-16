@@ -4,11 +4,14 @@ import Map from './map';
 import Action from './action';
 import Markers from './markers';
 
-export interface MapsProps {}
+export interface MapsProps {
+  center: google.maps.LatLng;
+  zoom: number;
+}
 
-const Maps = () => {
+const Maps = ({zoom = 12, center}: MapsProps) => {
   const [google, setGoogle] = React.useState<google>();
-  const [map, setMap] = React.useState<any>();
+  const [map, setMap] = React.useState<google.maps.Map>();
   const [markers, setMarkers] = React.useState<any>([]);
   React.useEffect(() => {
     const loader = new Loader();
@@ -22,14 +25,14 @@ const Maps = () => {
       <section
         style={{float: 'left', width: 'calc(100% - 480px)', height: '100%'}}
       >
-        <Map google={google} onLoadMap={setMap} />
+        <Map {...{zoom, center, google}} onLoadMap={setMap} />
       </section>
       <section style={{float: 'left', width: '480px', height: '100%'}}>
         <header>
-          <Action google={google} map={map} onSetMarkers={setMarkers} />
+          <Action {...{google, map}} onSetMarkers={setMarkers} />
         </header>
         <footer>
-          <Markers markers={markers} />
+          <Markers map={map!} markers={markers} />
         </footer>
       </section>
     </div>

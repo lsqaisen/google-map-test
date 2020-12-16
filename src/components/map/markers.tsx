@@ -1,11 +1,13 @@
 import * as React from 'react';
+import {google as Google} from 'google-maps';
 import styles from './style/index.less';
 
 export interface MarkersProps {
+  map: google.maps.Map;
   markers: any[];
 }
 
-const Markers = ({markers}: MarkersProps) => {
+const Markers = ({map, markers}: MarkersProps) => {
   const [page, setPage] = React.useState(1);
   const [data, setDate] = React.useState<any>([]);
   React.useEffect(() => {
@@ -23,7 +25,13 @@ const Markers = ({markers}: MarkersProps) => {
     <div style={{marginTop: 16}}>
       <ul className={styles.list}>
         {data.map(({title, position}: any) => (
-          <li className={styles.item} key={title}>
+          <li
+            className={styles.item}
+            key={title}
+            onClick={() => {
+              map.setCenter(position);
+            }}
+          >
             {title},(lat:{position.lat()},lng:{position.lng()} )
           </li>
         ))}
