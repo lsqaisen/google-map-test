@@ -5,8 +5,8 @@ import Action from './action';
 import Markers from './markers';
 
 export interface MapsProps {
-  center: google.maps.LatLng;
-  zoom: number;
+  center?: google.maps.LatLng;
+  zoom?: number;
 }
 
 const Maps = ({zoom = 12, center}: MapsProps) => {

@@ -17,7 +17,6 @@ const Action = ({google, map, onSetMarkers = () => {}}: ActionProps) => {
   const [markers, setMarkers] = React.useState<any>([]);
   const [polygon, setPolygon] = React.useState<google.maps.Polygon>();
   const [canFill, setCanFill] = React.useState(false);
-  const inputRef = React.useRef();
   React.useEffect(() => {
     let path: any[] = [];
     markers.forEach((v: any) => {
@@ -40,7 +39,6 @@ const Action = ({google, map, onSetMarkers = () => {}}: ActionProps) => {
       });
     }
   }, [markers]);
-  React.useLayoutEffect(() => {}, []);
   return (
     <>
       <button
@@ -81,19 +79,18 @@ const Action = ({google, map, onSetMarkers = () => {}}: ActionProps) => {
         </button>
       )}
       <input
-        // ref={inputRef}
         id="file"
         type="file"
         onChange={(e) => {
-          let file = document.getElementById(`file`).files[0];
+          let file = (document.getElementById(`file`) as any).files[0];
           console.log(file);
           const reader = new FileReader();
-          reader.onload = (e) => {
-            console.log(e.target.result)
-            let testi = new google.maps.Data();
+          reader.onload = (e: any) => {
+            console.log(e.target.result);
+            let testi = new google!.maps.Data();
             testi.loadGeoJson(URL.createObjectURL(new Blob([e.target.result])));
 
-            testi.setMap(map);
+            testi.setMap(map!);
           };
           reader.readAsText(file);
         }}
